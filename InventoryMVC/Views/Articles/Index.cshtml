@@ -1,0 +1,73 @@
+﻿@model IEnumerable<InventoryDAL.Models.table_articles>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Articles</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_in_shelf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_in_vault)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.store_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.store_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_in_shelf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_in_vault)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.table_stores.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.table_stores.name)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>*@
+    </tr>
+}
+
+</table>
+<p>
+    @Html.ActionLink("Back to List", "Index", "Stores", null, new { @class = "btn btn-default btn-xs btn-primary" })
+</p>

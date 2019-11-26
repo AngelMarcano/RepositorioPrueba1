@@ -1,0 +1,158 @@
+﻿@model IEnumerable<InventoryDAL.Models.table_stores>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>*@
+<h2>Stores</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null,  new { @class = "btn btn-default btn-xs btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-default btn-xs btn-primary" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default btn-xs btn-primary" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-default btn-xs btn-primary" }) |
+                <!--Comentado temporalmente-->
+                @*@Html.ActionLink("Articles", "Articles", new { id = item.Id }, new { @class = "btn btn-default btn-xs btn-primary" })*@
+                <!--Botón para activar el llamado ajax y obtener la lista de artículos en una tienda-->
+                <!--Comentado por que solamente se está mostrando data en IE. Para los navegadores FireFox y Crome no está mostrando data-->
+                <a id="btnArticles" href="#" class="btn btn-default btn-xs btn-primary articles" data-toggle="modal" data-target="#ArticlesModal" data-id="@item.Id">Articles</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="modal fade" id="ArticlesModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" datadismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Articles in Store</h4>
+            </div>
+            <div class="modal-body">
+                <div id="modal-content" style="height:100%; width:auto">
+                    <div style="width:90%; margin:0 auto">
+                        <table id="tblArticle" class="table table-striped"">
+                            <thead >
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Descripcion</th>
+                                    <th>Price</th>
+                                    <th>total_in_shelf</th>
+                                    <th>total_in_vault</th>
+                                    <th>store_name</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnClose"> Cancel </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    <script type="text/JavaScript">
+        $(document).ready(function () {
+           
+            $('.articles').click(function (e) {
+                e.preventDefault();
+                //debugger;
+                jQuery.support.cors = true;
+                //1
+                
+                var id = $(this).attr('data-id');                       // the id that's given to each button in the list
+                var articlesURL = 'http://localhost:51634/api/services/articles/store/' + id; // the url to the controller
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    cache: true, //Con esta propiedad es la que permite que IE actualice los valores en la ventana Modal, si se quita, no va a refrescar los valores
+                    type: "GET",
+                    crossDomain: true,
+                    //async: true,
+                    headers: {
+                        "accept": "application/json",
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "POST",
+                        "Access-Control-Allow-Headers": "Content-Type"
+                    },
+                   
+                    url: articlesURL,
+                    contentType: "application/json; charset=utf-8",
+                    
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        //debugger;
+                        var items = '';
+                        $('#tblArticle tbody').empty();
+                        $.each(data.articles, function (i, item) {
+                            var result = item;
+                            //debugger;
+                            var rows = "<tr>"
+                                + "<td>" + item.name + "</td>"
+                                + "<td>" + item.description + "</td>"
+                                + "<td>" + item.price + "</td>"
+                                + "<td>" + item.total_in_shelf + "</td>"
+                                + "<td>" + item.total_in_vault + "</td>"
+                                + "<td>" + item.table_stores.name + "</td>"
+                                + "</tr>";
+                            $('#tblArticle tbody').append(rows);
+                        });
+                        
+                        $('#modal-content').html(tblArticle);
+                        $('#ArticlesModal').modal(options);
+                        $('#ArticlesModal').modal('show');
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('An error occurred... Look at the console (F12 or Ctrl+Shift+I, Console tab) for more information!');
+
+                        $('#result').html('<p>status code: ' + jqXHR.status + '</p><p>errorThrown: ' + errorThrown + '</p><p>jqXHR.responseText:</p><div>' + jqXHR.responseText + '</div>');
+                        console.log('jqXHR:');
+                        console.log(jqXHR);
+                        console.log('textStatus:');
+                        console.log(textStatus);
+                        console.log('errorThrown:');
+                        console.log(errorThrown);
+                    }
+
+                });
+            });
+        });
+       
+    </script>
+}

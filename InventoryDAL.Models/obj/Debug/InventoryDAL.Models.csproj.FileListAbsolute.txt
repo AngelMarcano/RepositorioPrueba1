@@ -1,0 +1,16 @@
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\InventoryDAL.Models.dll.config
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\InventoryDAL.Models.dll
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\InventoryDAL.Models.pdb
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\EntityFramework.dll
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\EntityFramework.xml
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\obj\Debug\InventoryDAL.Models.csproj.CoreCompileInputs.cache
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\obj\Debug\InventoryDAL.Models.dll
+C:\Users\Angel\source\repos\InventoryMVC\InventoryDAL.Models\obj\Debug\InventoryDAL.Models.pdb
